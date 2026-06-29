@@ -1,0 +1,10 @@
+# This repo runs the same hooks on itself via a `local` repo in `prek.toml`.
+# Keep all hooks, and their fields, synced between the two files.
+
+- description: Forbid tabs except those used for indentation.
+  id: no-inline-tabs
+  name: check for inline tabs
+  entry: '^\t*[^\t].*\t'
+  language: pygrep
+  types:
+    - text
