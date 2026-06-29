@@ -1,0 +1,37 @@
+#:schema https://www.schemastore.org/prek.json
+
+[[repos]]
+repo = "builtin"
+hooks = [
+	{ id = "trailing-whitespace", args = [
+		"--markdown-linebreak-ext=md,mdx",
+	] },
+	{ id = "end-of-file-fixer" },
+	{ id = "check-json", exclude = "^\\.vscode/.*\\.json|.oxlintrc\\.json|.oxfmtrc\\.json|tsconfig\\.json$" },
+	{ id = "check-toml" },
+	{ id = "check-yaml" },
+	{ id = "mixed-line-ending", args = [
+		"--fix=lf",
+	] },
+	{ id = "check-symlinks" },
+	{ id = "destroyed-symlinks" },
+	{ id = "check-merge-conflict" },
+	{ id = "detect-private-key" },
+	{ id = "check-shebang-scripts-are-executable" },
+	{ id = "check-executables-have-shebangs" },
+]
+
+[[repos]]
+repo = "https://github.com/editorconfig-checker/editorconfig-checker"
+rev = "v3.7.0"
+hooks = [{ id = "editorconfig-checker", exclude = "^LICENSE$" }]
+
+[[repos]]
+repo = "local"
+hooks = [
+	# This is also exported for other repos to source from `.pre-commit-hooks.yaml`. Keep
+	# all fields, especially the regex in `entry`, synced between the two.
+	{ id = "no-inline-tabs", name = "check for inline tabs", entry = '^\t*[^\t].*\t', language = "pygrep", types = [
+		"text",
+	] },
+]
