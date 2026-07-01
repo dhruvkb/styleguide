@@ -34,4 +34,7 @@ hooks = [
 	{ id = "no-inline-tabs", name = "check for inline tabs", entry = '^\t*[^\t].*\t', language = "pygrep", types = [
 		"text",
 	] },
+	{ id = "no-autosquash-commits", name = "check for autosquash commits", entry = "hooks/no-autosquash-commits.py", language = "script", stages = [
+		"pre-push",
+	], always_run = true, pass_filenames = false },
 ]

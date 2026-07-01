@@ -8,3 +8,13 @@
   language: pygrep
   types:
     - text
+
+- description: Prevent autosquash commits from being pushed.
+  id: no-autosquash-commits
+  name: check for autosquash commits
+  entry: hooks/no-autosquash-commits.py
+  language: script
+  stages:
+    - pre-push
+  always_run: true
+  pass_filenames: false
