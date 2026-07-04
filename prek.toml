@@ -1,5 +1,8 @@
 #:schema https://www.schemastore.org/prek.json
 
+# § global
+# § ======
+
 [[repos]]
 repo = "builtin"
 hooks = [
@@ -26,6 +29,11 @@ repo = "https://github.com/editorconfig-checker/editorconfig-checker"
 rev = "v3.7.0"
 hooks = [{ id = "editorconfig-checker", exclude = "^LICENSE$" }]
 
+# /§ global
+
+# § project
+# § =======
+
 [[repos]]
 repo = "local"
 hooks = [
@@ -38,3 +46,5 @@ hooks = [
 		"pre-push",
 	], always_run = true, pass_filenames = false },
 ]
+
+# /§ project
