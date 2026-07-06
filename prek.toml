@@ -23,12 +23,12 @@ hooks = [
 
 [[repos]]
 repo = "https://github.com/editorconfig-checker/editorconfig-checker"
-rev = "v3.7.0"
+rev = "v3.8.0"
 hooks = [{ id = "editorconfig-checker", exclude = "^LICENSE$" }]
 
 [[repos]]
 repo = "https://github.com/astral-sh/ruff-pre-commit"
-rev = "v0.15.0"
+rev = "v0.15.20"
 hooks = [{ id = "ruff-check", args = ["--fix"] }, { id = "ruff-format" }]
 
 [[repos]]
