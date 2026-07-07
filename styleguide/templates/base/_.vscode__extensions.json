@@ -1,0 +1,23 @@
+{
+	"recommendations": [
+		{% filter indent_block(width="\t\t") %}
+		{% block recommendations %}
+		{% endblock recommendations %}
+		{% endfilter %}
+		{% if "astro" in exts %}
+		"astro-build.astro-vscode",
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
+		{% endif %}
+		{% if "mdx" in exts %}
+		"unifiedjs.vscode-mdx",
+		{% endif %}
+		{% if "py" in exts %}
+		"ms-python.python",
+		"charliermarsh.ruff",
+		{% endif %}
+		{% if "rs" in exts %}
+		"rust-lang.rust-analyzer"
+		{% endif %}
+	]
+}

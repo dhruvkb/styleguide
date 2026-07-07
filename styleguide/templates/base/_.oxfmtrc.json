@@ -1,0 +1,10 @@
+{
+	"$schema": "./node_modules/oxfmt/configuration_schema.json",
+	{% if "vue" in languages %}
+	"vueIndentScriptAndStyle": true,
+	{% endif %}
+	"sortImports": true,
+	// TODO: Enable import sorting
+	// https://oxc.rs/docs/guide/usage/formatter/sorting.html#sort-imports
+	"proseWrap": "always"
+}

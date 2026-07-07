@@ -1,0 +1,22 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"plugins": [
+		{% if "vue" in languages %}
+		"vue",
+		"vitest",
+		{% endif %}
+		"eslint",
+		"typescript",
+		"unicorn",
+		"oxc"
+	],
+	"env": {
+		"browser": true
+	},
+	"categories": {
+		"correctness": "error",
+		"suspicious": "error",
+		"pedantic": "error",
+		"perf": "error"
+	}
+}

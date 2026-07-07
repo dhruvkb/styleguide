@@ -1,0 +1,105 @@
+{
+	{% if accent_color %}
+	"workbench.colorCustomizations": {
+		"titleBar.activeForeground": "#ffffff",
+		"titleBar.inactiveForeground": "#ffffff",
+		"titleBar.activeBackground": "<< accent_color >>",
+		"titleBar.inactiveBackground": "<< accent_color >>"
+	},
+	{% endif %}
+	"files.associations": {
+		{% filter indent_block(width="\t\t") %}
+		{% block files_associations %}
+		{% endblock files_associations %}
+		{% endfilter %}
+		"**/.sg/_*": "jinja"
+	},
+	{% if "astro" in exts %}
+	"[astro]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.codeActionsOnSave": {
+			"source.fixAll.oxc": "explicit",
+			"source.fixAll.eslint": "explicit"
+		}
+	},
+	{% endif %}
+	{% if "css" in exts %}
+	"[css]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "oxc.oxc-vscode"
+	},
+	{% endif %}
+	{% if "js" in exts or "mjs" in exts %}
+	"[javascript]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "oxc.oxc-vscode",
+		"editor.codeActionsOnSave": {
+			"source.fixAll.oxc": "explicit"
+		}
+	},
+	{% endif %}
+	{% if "json" in exts %}
+	"[json]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "oxc.oxc-vscode"
+	},
+	"[jsonc]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "oxc.oxc-vscode"
+	},
+	{% endif %}
+	{% if "md" in exts %}
+	"[markdown]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "oxc.oxc-vscode"
+	},
+	{% endif %}
+	{% if "mdx" in exts %}
+	"[mdx]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "oxc.oxc-vscode"
+	},
+	{% endif %}
+	{% if "py" in exts %}
+	"[python]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "charliermarsh.ruff",
+		"editor.codeActionsOnSave": {
+			"source.fixAll.ruff": "explicit",
+			"source.organizeImports.ruff": "explicit"
+		}
+	},
+	{% endif %}
+	{% if "rs" in exts %}
+	"[rust]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "rust-lang.rust-analyzer"
+	},
+	{% endif %}
+	{% if "toml" in exts %}
+	"[toml]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "oxc.oxc-vscode"
+	},
+	{% endif %}
+	{% if "ts" in exts or "mts" in exts %}
+	"[typescript]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "oxc.oxc-vscode",
+		"editor.codeActionsOnSave": {
+			"source.fixAll.oxc": "explicit"
+		}
+	},
+	{% endif %}
+	{% if "yaml" in exts or "yml" in exts %}
+	"[yaml]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "oxc.oxc-vscode"
+	}
+	{% endif %}
+	{% filter indent_block %}
+	{% block project %}
+	{% endblock project %}
+	{% endfilter %}
+}

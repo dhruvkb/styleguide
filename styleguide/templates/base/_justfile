@@ -1,0 +1,69 @@
+{% set prek_manager = prek_manager | default("pnpm") %}
+set dotenv-load := false
+
+# @ toggles quieting at the recipe-level. Without quiet, each commands is
+#   printed to STDERR before execution.
+# _ marks a recipe as private and stops it from appearing in `just --list` or
+#   `just --summary`.
+
+# Show all available recipes.
+@_default:
+	just --list --unsorted
+	{% filter indent_block %}
+	{% block recipe_default %}
+	{% endblock recipe_default %}
+	{% endfilter %}
+
+# Print the given text with an equal number of `=` characters below it.
+@_section text:
+	printf "\n{{ text }}\n"
+	printf "%0.s=" $(seq 1 $(printf "%s" "{{ text }}" | wc -c))
+	printf "\n"
+
+# Setup
+# =====
+
+# Install dependencies.
+install:
+	{% if "python" in languages %}
+	uv sync
+	{% endif %}
+	{% if "javascript" in languages %}
+	pnpm i
+	{% endif %}
+	{% if "rust" in languages %}
+	cargo bin --install
+	{% endif %}
+	{% filter indent_block %}
+	{% block recipe_install %}
+	{% endblock recipe_install %}
+	{% endfilter %}
+
+	just prek install --hook-type pre-commit --hook-type pre-push
+
+alias i := install
+
+# Lint
+# ====
+
+# This abstracts the underlying provisioning of `prek` through the appropriate
+# package manager (which may be pnpm, or even uv or Cargo).
+#
+# Run `prek` commands through package manager.
+prek *args:
+	{% if prek_manager == "uv" %}
+	uv run prek {{ args }}
+	{% elif prek_manager == "pnpm" %}
+	pnpm prek {{ args }}
+	{% elif prek_manager == "cargo" %}
+	cargo bin prek {{ args }}
+	{% endif %}
+
+# Run one, or all, of `prek`'s hooks on specific, or all, files.
+lint hook="" *files="":
+	just prek run {{ hook }} {{ if files == "" { "--all-files" } else { "--files" } }} {{ files }}
+
+alias l := lint
+
+{% block project %}
+{% endblock project %}
