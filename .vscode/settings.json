@@ -1,0 +1,47 @@
+{
+	"workbench.colorCustomizations": {
+		"titleBar.activeForeground": "#ffffff",
+		"titleBar.inactiveForeground": "#ffffff",
+		"titleBar.activeBackground": "#4d7c0f",
+		"titleBar.inactiveBackground": "#4d7c0f"
+	},
+	"files.associations": {
+		"**/templates/**/_*": "jinja",
+		"**/.sg/_*": "jinja"
+	},
+	"[javascript]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "oxc.oxc-vscode",
+		"editor.codeActionsOnSave": {
+			"source.fixAll.oxc": "explicit"
+		}
+	},
+	"[json]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "oxc.oxc-vscode"
+	},
+	"[jsonc]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "oxc.oxc-vscode"
+	},
+	"[markdown]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "oxc.oxc-vscode"
+	},
+	"[python]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "charliermarsh.ruff",
+		"editor.codeActionsOnSave": {
+			"source.fixAll.ruff": "explicit",
+			"source.organizeImports.ruff": "explicit"
+		}
+	},
+	"[toml]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "oxc.oxc-vscode"
+	},
+	"[yaml]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "oxc.oxc-vscode"
+	}
+}
