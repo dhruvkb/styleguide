@@ -7,9 +7,9 @@ hooks = [
 		"--markdown-linebreak-ext=md,mdx",
 	] },
 	{ id = "end-of-file-fixer" },
-	{ id = "check-json", exclude = "^\\.vscode/.*\\.json|.oxlintrc\\.json|.oxfmtrc\\.json|tsconfig\\.json$" },
-	{ id = "check-toml" },
-	{ id = "check-yaml" },
+	{ id = "check-json", exclude = "^styleguide/templates/|^\\.vscode/.*\\.json|.oxlintrc\\.json|.oxfmtrc\\.json|tsconfig\\.json$" },
+	{ id = "check-toml", exclude = "^styleguide/templates/" },
+	{ id = "check-yaml", exclude = "^styleguide/templates/" },
 	{ id = "mixed-line-ending", args = [
 		"--fix=lf",
 	] },
@@ -34,7 +34,7 @@ hooks = [{ id = "ruff-check", args = ["--fix"] }, { id = "ruff-format" }]
 [[repos]]
 repo = "local"
 hooks = [
-	{ id = "oxfmt", name = "Oxfmt", entry = "pnpm oxfmt", language = "system", types_or = [
+	{ id = "oxfmt", name = "Oxfmt", entry = "pnpm oxfmt", language = "system", exclude = "^styleguide/templates/", types_or = [
 		# Taken from the Oxc compatibility list: https://oxc.rs/compatibility.html
 		"javascript",
 		"ts",
