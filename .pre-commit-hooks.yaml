@@ -18,3 +18,23 @@
     - pre-push
   always_run: true
   pass_filenames: false
+
+- description: Check that scaffolding files are in sync with `sg`.
+  id: sg-status
+  name: check scaffolding compliance
+  entry: sg status --only-drifts
+  language: python
+  stages:
+    - pre-push
+  always_run: true
+  pass_filenames: false
+
+- description: Check that scaffolding files are valid
+  id: sg-validate
+  name: check scaffolding validity
+  entry: sg validate --only-fails
+  language: python
+  stages:
+    - pre-push
+  always_run: true
+  pass_filenames: false
