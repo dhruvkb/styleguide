@@ -72,7 +72,7 @@ class Repo:
 			(
 				ScaffoldFile(self, item)
 				for item in sorted(self.sg_dir.glob("*.j2"))
-				if item.is_file() and item.name.startswith("_")
+				if item.is_file()
 			),
 			key=lambda f: f.target_path,
 		)
