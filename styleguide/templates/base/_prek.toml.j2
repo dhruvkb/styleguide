@@ -7,7 +7,7 @@ hooks = [
 		"--markdown-linebreak-ext=md,mdx",
 	] },
 	{ id = "end-of-file-fixer" },
-	{ id = "check-json", exclude = "^\\.vscode/.*\\.json|.oxlintrc\\.json|.oxfmtrc\\.json|tsconfig\\.json$" },
+	{ id = "check-json", exclude = "\\.vscode/.*\\.json|\\.oxlintrc\\.json|\\.oxfmtrc\\.json|tsconfig\\.json" },
 	{ id = "check-toml" },
 	{ id = "check-yaml" },
 	{ id = "mixed-line-ending", args = [
@@ -24,7 +24,7 @@ hooks = [
 [[repos]]
 repo = "https://github.com/editorconfig-checker/editorconfig-checker"
 rev = "v3.8.0"
-hooks = [{ id = "editorconfig-checker", exclude = "^LICENSE$" }]
+hooks = [{ id = "editorconfig-checker", exclude = "LICENSE$" }]
 
 {% if not exclude_sg %}
 [[repos]]
@@ -46,6 +46,7 @@ hooks = [{ id = "ruff-check", args = ["--fix"] }, { id = "ruff-format" }]
 
 {% endif %}
 [[repos]]
+repo = "local"
 hooks = [
 	{ id = "oxfmt", name = "Oxfmt", entry = "pnpm oxfmt", language = "system", types_or = [
 		# Taken from the Oxc compatibility list: https://oxc.rs/compatibility.html
@@ -58,10 +59,11 @@ hooks = [
 		# change only has the ignored files.
 		"--no-error-on-unmatched-pattern",
 	] },
-]repo = "local"
+]
 
 {% if "javascript" in languages %}
 [[repos]]
+repo = "local"
 hooks = [
 	{ id = "oxlint", name = "Oxlint", entry = "pnpm oxlint:fix", language = "system", types_or = [
 		{% if "vue" in languages %}
@@ -73,7 +75,7 @@ hooks = [
 		"javascript",
 		"ts",
 	] },
-]repo = "local"
+]
 
 {% endif %}
 {% if "astro" in languages %}

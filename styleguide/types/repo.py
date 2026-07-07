@@ -71,7 +71,7 @@ class Repo:
 		return sorted(
 			(
 				ScaffoldFile(self, item)
-				for item in sorted(self.sg_dir.glob("*"))
+				for item in sorted(self.sg_dir.glob("*.j2"))
 				if item.is_file() and item.name.startswith("_")
 			),
 			key=lambda f: f.target_path,

@@ -68,7 +68,9 @@ class ScaffoldFile:
 		Return the path to the target file that the template creates relative to
 		the repo root.
 		"""
-		return Path(*self.template_file_name.lstrip("_").split("__"))
+		return Path(
+			*self.template_file_name.lstrip("_").removesuffix(".j2").split("__")
+		)
 
 	@cached_property
 	def target_path(self) -> Path:
