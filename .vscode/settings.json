@@ -6,15 +6,8 @@
 		"titleBar.inactiveBackground": "#4d7c0f"
 	},
 	"files.associations": {
-		"**/templates/**/_*": "jinja",
-		"**/.sg/_*": "jinja"
-	},
-	"[javascript]": {
-		"editor.formatOnSave": true,
-		"editor.defaultFormatter": "oxc.oxc-vscode",
-		"editor.codeActionsOnSave": {
-			"source.fixAll.oxc": "explicit"
-		}
+		"**/templates/**/*.j2": "jinja",
+		"**/.sg/*.j2": "jinja"
 	},
 	"[json]": {
 		"editor.formatOnSave": true,
