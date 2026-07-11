@@ -34,7 +34,11 @@ def normalize(repo: Path, path: Path, content: str) -> str:
 	:return: the formatted content of the file
 	"""
 
-	path_types = identify.tags_from_path(str(path))
+	try:
+		path_types = identify.tags_from_path(str(path))
+	except ValueError:
+		return content
+
 	if not path_types & set(OXFMT_TYPES):
 		return content
 
