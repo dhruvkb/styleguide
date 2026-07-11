@@ -65,8 +65,11 @@ alias s := self-install
 # Release
 # =======
 
-# Tag a commit with a version number ('v' will be prefixed automatically)
-release version commit="":
-	git tag -a v{{ version }} -m "Release v{{ version }}" {{ commit }}
+# Bump the project's version number.
+bump part="minor":
+	uv version --bump {{ part }}
+	git add -p pyproject.toml uv.lock
+	git commit -m "Bump version to $(uv version --short)"
+	git tag -s v$(uv version --short) -m "Release v$(uv version --short)"
 
-alias R := release
+alias B := bump
