@@ -1,4 +1,3 @@
-{% set prek_manager = prek_manager | default("pnpm") %}
 set dotenv-load := false
 
 # @ toggles quieting at the recipe-level. Without quiet, each commands is
@@ -39,29 +38,16 @@ install:
 	{% endblock recipe_install %}
 	{% endfilter %}
 
-	just prek install --hook-type pre-commit --hook-type pre-push
+	pnpm prek install --hook-type pre-commit --hook-type pre-push
 
 alias i := install
 
 # Lint
 # ====
 
-# This abstracts the underlying provisioning of `prek` through the appropriate
-# package manager (which may be pnpm, or even uv or Cargo).
-#
-# Run `prek` commands through package manager.
-prek *args:
-	{% if prek_manager == "uv" %}
-	uv run prek {{ args }}
-	{% elif prek_manager == "pnpm" %}
-	pnpm prek {{ args }}
-	{% elif prek_manager == "cargo" %}
-	cargo bin prek {{ args }}
-	{% endif %}
-
 # Run one, or all, of `prek`'s hooks on specific, or all, files.
 lint hook="" *files="":
-	just prek run {{ hook }} {{ if files == "" { "--all-files" } else { "--files" } }} {{ files }}
+	pnpm prek run {{ hook }} {{ if files == "" { "--all-files" } else { "--files" } }} {{ files }}
 
 alias l := lint
 
