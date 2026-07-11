@@ -25,13 +25,13 @@ set dotenv-load := false
 
 # Install dependencies.
 install:
-	{% if "python" in languages %}
+	{% if "uv" in package_managers %}
 	uv sync
 	{% endif %}
-	{% if "javascript" in languages %}
+	{% if "pnpm" in package_managers %}
 	pnpm i
 	{% endif %}
-	{% if "rust" in languages %}
+	{% if "cargo" in package_managers %}
 	cargo bin --install
 	{% endif %}
 	{% filter indent_block %}

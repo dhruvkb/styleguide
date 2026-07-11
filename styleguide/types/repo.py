@@ -155,6 +155,20 @@ class Repo:
 		return self.path.name
 
 	@cached_property
+	def package_managers(self) -> list[str]:
+		"""the package managers detected in the repo"""
+
+		managers: list[str] = []
+		names = {name.rsplit("/", 1)[-1] for name in self.git_files}
+		if "pnpm-lock.yaml" in names:
+			managers.append("pnpm")
+		if "uv.lock" in names:
+			managers.append("uv")
+		if "Cargo.lock" in names:
+			managers.append("cargo")
+		return managers
+
+	@cached_property
 	def context(self) -> dict[str, Any]:
 		"""the Jinja render context for this repo's templates"""
 
@@ -169,6 +183,7 @@ class Repo:
 			"languages": languages,
 			"display_name": self.display_name,
 			"gh_owner_and_name": self.gh_owner_and_name,
+			"package_managers": self.package_managers,
 		}
 
 	@cached_property
