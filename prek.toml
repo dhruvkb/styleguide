@@ -73,6 +73,12 @@ hooks = [
 	{ id = "no-autosquash-commits", name = "check for autosquash commits", entry = "hooks/no-autosquash-commits.py", language = "script", stages = [
 		"pre-push",
 	], always_run = true, pass_filenames = false },
+	{ id = "sg-status", name = "check scaffolding compliance", entry = "uv run sg status --only-drifts", language = "system", stages = [
+		"pre-push",
+	], always_run = true, pass_filenames = false },
+	{ id = "sg-validate", name = "check scaffolding validity", entry = "uv run sg validate --only-fails", language = "system", stages = [
+		"pre-push",
+	], always_run = true, pass_filenames = false },
 ]
 
 # /§ project
