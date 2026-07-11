@@ -15,7 +15,18 @@ from pathlib import Path
 import platformdirs
 import requests
 
-SELF_LICENSE = Path(__file__).resolve().parents[1] / "LICENSE"
+
+def _self_license() -> Path:
+	"""Locate this project's own license.
+
+	In a built wheel the root `LICENSE` is force-included as package data at
+	`styleguide/assets/LICENSE` (see `pyproject.toml`). In the source tree, it
+	lives at the repo root, one level above this package.
+	"""
+	packaged = Path(__file__).resolve().parent / "assets" / "LICENSE"
+	if packaged.is_file():
+		return packaged
+	return Path(__file__).resolve().parents[1] / "LICENSE"
 
 
 def remote_owner_repo(repo_path: Path) -> tuple[str | None, str | None]:
@@ -99,7 +110,7 @@ def resolve_license(code: str) -> str:
 	`$XDG_CACHE_HOME` on macOS.
 	"""
 	if code == "gpl-3.0":
-		return SELF_LICENSE.read_text().rstrip("\n")
+		return _self_license().read_text().rstrip("\n")
 
 	cache_dir = Path(platformdirs.user_cache_dir("styleguide")) / "licenses"
 	cached = cache_dir / f"{code}.txt"

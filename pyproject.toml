@@ -24,3 +24,8 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["styleguide"]
+
+# Ship the root `LICENSE` as package data so that a network call is not needed
+# for projects that use GNU GPL 3.0.
+[tool.hatch.build.targets.wheel.force-include]
+"LICENSE" = "styleguide/assets/LICENSE"
