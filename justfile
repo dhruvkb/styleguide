@@ -50,7 +50,7 @@ alias l := lint
 shell:
 	uv run ipython
 
-# Run the project in development mode.
+# Run the program in development mode.
 run *args:
 	uv run sg {{ args }}
 
@@ -65,7 +65,7 @@ alias s := self-install
 # Release
 # =======
 
-# Bump the project's version number.
+# Bump the version and create a release commit and tag.
 bump part="minor":
 	uv version --bump {{ part }}
 	git add -p pyproject.toml uv.lock
