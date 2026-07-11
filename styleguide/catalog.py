@@ -26,6 +26,8 @@ MANAGED_SCAFFOLDING = [
 	# Toolchain pins
 	".node-version",
 	".python-version",
+	# Package manager config
+	"pnpm-workspace.yaml",
 	# Linting / formatting
 	".oxlintrc.json",
 	".oxfmtrc.json",
