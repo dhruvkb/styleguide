@@ -45,22 +45,6 @@ rev = "v0.15.20"
 hooks = [{ id = "ruff-check", args = ["--fix"] }, { id = "ruff-format" }]
 
 {% endif %}
-[[repos]]
-repo = "local"
-hooks = [
-	{ id = "oxfmt", name = "Oxfmt", entry = "pnpm oxfmt", language = "system", types_or = [
-		# Taken from the Oxc compatibility list: https://oxc.rs/compatibility.html
-		{% for item in oxfmt_types %}
-		"<< item >>",
-		{% endfor %}
-	], args = [
-		# Since there may be files which match `types_or` but are ignored by
-		# `.oxfmtrc.json`, we need to silence the error raised when the staged
-		# change only has the ignored files.
-		"--no-error-on-unmatched-pattern",
-	] },
-]
-
 {% if "javascript" in languages %}
 [[repos]]
 repo = "local"
@@ -78,6 +62,22 @@ hooks = [
 ]
 
 {% endif %}
+[[repos]]
+repo = "local"
+hooks = [
+	{ id = "oxfmt", name = "Oxfmt", entry = "pnpm oxfmt", language = "system", types_or = [
+		# Taken from the Oxc compatibility list: https://oxc.rs/compatibility.html
+		{% for item in oxfmt_types %}
+		"<< item >>",
+		{% endfor %}
+	], args = [
+		# Since there may be files which match `types_or` but are ignored by
+		# `.oxfmtrc.json`, we need to silence the error raised when the staged
+		# change only has the ignored files.
+		"--no-error-on-unmatched-pattern",
+	] },
+]
+
 {% if "astro" in languages %}
 [[repos]]
 repo = "local"
