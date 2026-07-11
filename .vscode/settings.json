@@ -9,6 +9,9 @@
 		"**/templates/**/*.j2": "jinja",
 		"**/.sg/*.j2": "jinja"
 	},
+	"explorer.fileNesting.patterns": {
+		"pyproject.toml": "uv.lock"
+	},
 	"[json]": {
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "oxc.oxc-vscode"
