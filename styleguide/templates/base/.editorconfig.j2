@@ -6,28 +6,32 @@ insert_final_newline = true
 indent_style = tab
 indent_size = 2
 
-{% if "rust" in languages %}
+{% if "rs" in exts %}
 [*.rs]
 # The Rust Style Guide mandates using 4 spaces for indentation.
 indent_size = 4
 
 {% endif %}
-{% if "python" in languages %}
+{% if "py" in exts %}
 [*.py]
 # PEP 8 mandates using 4 spaces for indentation.
 indent_size = 4
 
 {% endif %}
+{% if "yml" in exts or "yaml" in exts %}
 [*.{yml,yaml}]
 # The YAML spec only allows using spaces for indentation.
 indent_style = space
 
+{% endif %}
+{% if "md" in exts or "mdx" in exts %}
 [*.{md,mdx}]
 # Prettier and Oxfmt will use a variable number of spaces for indentation and
 # alignment, regardless of `.editorconfig`. So just give in and use spaces.
 indent_style = space
 indent_size = unset
 
+{% endif %}
 # § project
 # § =======
 
