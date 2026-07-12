@@ -26,8 +26,6 @@ MANAGED_SCAFFOLDING = [
 	# Toolchain pins
 	".node-version",
 	".python-version",
-	# Package manager config
-	"pnpm-workspace.yaml",
 	# Linting / formatting
 	".oxlintrc.json",
 	".oxfmtrc.json",
@@ -45,6 +43,8 @@ VALIDATED_SCAFFOLDING: dict[str, Sequence[Validator] | None] = {
 	"package.json": None,
 	"pyproject.toml": None,
 	"Cargo.toml": None,
+	# Package manager config
+	"pnpm-workspace.yaml": None,
 	# TypeScript
 	"tsconfig.json": None,
 }
