@@ -1,10 +1,12 @@
-{% set oxfmt = npm_version("oxfmt") %}
 {% set prek = npm_version("@j178/prek") %}
+{% set oxfmt = npm_version("oxfmt") %}
+{% set pnpm = npm_version("pnpm") %}
 {
 	"$schema": "https://json.schemastore.org/package.json",
 	"private": true,
 	"devDependencies": {
-		"oxfmt": "^<< oxfmt.major >>.<< oxfmt.minor >>.<< oxfmt.patch >>",
-		"@j178/prek": "^<< prek.major >>.<< prek.minor >>.<< prek.patch >>"
-	}
+		"@j178/prek": "^<< prek.major >>.<< prek.minor >>.<< prek.patch >>",
+		"oxfmt": "^<< oxfmt.major >>.<< oxfmt.minor >>.<< oxfmt.patch >>"
+	},
+	"packageManager": "pnpm@<< pnpm.major >>.<< pnpm.minor >>.<< pnpm.patch >>"
 }
