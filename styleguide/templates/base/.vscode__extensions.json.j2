@@ -4,19 +4,24 @@
 		{% block recommendations %}
 		{% endblock recommendations %}
 		{% endfilter %}
-		{% if "astro" in exts %}
-		"astro-build.astro-vscode",
+		{% if "javascript" in languages %}
 		"dbaeumer.vscode-eslint",
+		{% endif %}
+		{% if "astro" in frameworks %}
+		"astro-build.astro-vscode",
 		"esbenp.prettier-vscode",
 		{% endif %}
-		{% if "mdx" in exts %}
+		{% if "vue" in frameworks %}
+		"Vue.volar",
+		{% endif %}
+		{% if "mdx" in frameworks %}
 		"unifiedjs.vscode-mdx",
 		{% endif %}
-		{% if "py" in exts %}
+		{% if "python" in languages %}
 		"ms-python.python",
 		"charliermarsh.ruff",
 		{% endif %}
-		{% if "rs" in exts %}
+		{% if "rust" in languages %}
 		"rust-lang.rust-analyzer"
 		{% endif %}
 	]

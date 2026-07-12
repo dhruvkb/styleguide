@@ -26,10 +26,9 @@ if TYPE_CHECKING:
 
 LANGUAGE_EXTENSIONS: dict[str, set[str]] = {
 	"python": {"py"},
-	"javascript": {"js", "mjs"},
-	"typescript": {"ts", "mts"},
+	"javascript": {"js", "mjs", "vue", "astro"},
+	"typescript": {"ts", "mts", "vue", "astro"},
 	"rust": {"rs"},
-	"astro": {"astro"},
 	"markdown": {"md", "mdx"},
 	"toml": {"toml"},
 	"json": {"json"},
@@ -169,6 +168,19 @@ class Repo:
 		return managers
 
 	@cached_property
+	def frameworks(self) -> list[str]:
+		"""the frameworks detected in the repo"""
+
+		frameworks: list[str] = []
+		if "astro" in self.exts:
+			frameworks.append("astro")
+		if "vue" in self.exts:
+			frameworks.append("vue")
+		if "mdx" in self.exts:
+			frameworks.append("mdx")
+		return frameworks
+
+	@cached_property
 	def context(self) -> dict[str, Any]:
 		"""the Jinja render context for this repo's templates"""
 
@@ -181,6 +193,7 @@ class Repo:
 		return {
 			"exts": self.exts,
 			"languages": languages,
+			"frameworks": self.frameworks,
 			"display_name": self.display_name,
 			"gh_owner_and_name": self.gh_owner_and_name,
 			"package_managers": self.package_managers,

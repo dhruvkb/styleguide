@@ -50,10 +50,10 @@ hooks = [{ id = "ruff-check", args = ["--fix"] }, { id = "ruff-format" }]
 repo = "local"
 hooks = [
 	{ id = "oxlint", name = "Oxlint", entry = "pnpm oxlint:fix", language = "system", types_or = [
-		{% if "vue" in languages %}
+		{% if "vue" in frameworks %}
 		"vue",
 		{% endif %}
-		{% if "astro" in languages %}
+		{% if "astro" in frameworks %}
 		"astro",
 		{% endif %}
 		"javascript",
@@ -78,7 +78,7 @@ hooks = [
 	] },
 ]
 
-{% if "astro" in languages %}
+{% if "astro" in frameworks %}
 [[repos]]
 repo = "local"
 hooks = [
