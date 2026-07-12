@@ -154,18 +154,30 @@ class Repo:
 		return self.path.name
 
 	@cached_property
-	def package_managers(self) -> list[str]:
+	def root_package_managers(self) -> list[str]:
 		"""the package managers detected in the repo"""
 
-		managers: list[str] = []
-		names = {name.rsplit("/", 1)[-1] for name in self.git_files}
-		if "pnpm-lock.yaml" in names:
-			managers.append("pnpm")
-		if "uv.lock" in names:
-			managers.append("uv")
-		if "Cargo.lock" in names:
-			managers.append("cargo")
-		return managers
+		lock_files = {
+			"pnpm-lock.yaml": "pnpm",
+			"uv.lock": "uv",
+			"Cargo.lock": "cargo",
+		}
+		return [
+			manager
+			for lock_file, manager in lock_files.items()
+			if (self.path / lock_file).exists()
+		]
+
+	@cached_property
+	def is_pnpm_workspace(self) -> bool:
+		"""whether this repo is a pnpm workspace"""
+
+		workspace_file = self.path / "pnpm-workspace.yaml"
+		if not workspace_file.exists():
+			return False
+
+		content = workspace_file.read_text()
+		return "packages:" in content
 
 	@cached_property
 	def frameworks(self) -> list[str]:
@@ -196,7 +208,8 @@ class Repo:
 			"frameworks": self.frameworks,
 			"display_name": self.display_name,
 			"gh_owner_and_name": self.gh_owner_and_name,
-			"package_managers": self.package_managers,
+			"package_managers": self.root_package_managers,
+			"is_pnpm_workspace": self.is_pnpm_workspace,
 		}
 
 	@cached_property
