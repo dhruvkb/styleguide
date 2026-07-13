@@ -61,14 +61,7 @@ alias s := self-install
 # Bump the version and create a release commit and tag.
 bump part="minor":
 	uv version --bump {{ part }}
-	sed \
-		-i '' \
-		-e '/dhruvkb\/styleguide/{' \
-		-e n \
-		-e 's/rev = "v[^"]*"/rev = "v'"$(uv version --short)"'"/' \
-		-e '}' \
-		styleguide/templates/base/prek.toml.j2
-	git add -p pyproject.toml uv.lock styleguide/templates/base/prek.toml.j2
+	git add -p pyproject.toml uv.lock
 	git commit -m "Bump version to $(uv version --short)"
 	git tag -s v$(uv version --short) -m "Release v$(uv version --short)"
 

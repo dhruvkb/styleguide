@@ -10,10 +10,16 @@ from __future__ import annotations
 import json
 import re
 import subprocess
+from importlib.metadata import version
 from pathlib import Path
 
 import platformdirs
 import requests
+
+
+def styleguide_version() -> str:
+	"""Get this package's own version, e.g. for pinning its own `prek` hooks."""
+	return version("styleguide")
 
 
 def _self_license() -> Path:

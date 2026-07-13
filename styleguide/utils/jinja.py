@@ -9,6 +9,7 @@ from styleguide.context import (
 	npm_version,
 	python_version,
 	resolve_license,
+	styleguide_version,
 )
 from styleguide.utils.fmt import OXFMT_TYPES
 
@@ -46,5 +47,6 @@ def jinja_env(templates_path: Path) -> Environment:
 	env.globals["python_version"] = python_version  # ty: ignore[invalid-assignment]
 	env.globals["npm_version"] = npm_version  # ty: ignore[invalid-assignment]
 	env.globals["license"] = resolve_license  # ty: ignore[invalid-assignment]
+	env.globals["styleguide_version"] = styleguide_version  # ty: ignore[invalid-assignment]
 	env.filters["indent_block"] = indent_block
 	return env
