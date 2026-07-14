@@ -2,9 +2,12 @@ import subprocess
 from typing import TYPE_CHECKING
 
 from identify import identify
+from rich.console import Console
 
 if TYPE_CHECKING:
 	from pathlib import Path
+
+err_console = Console(stderr=True)
 
 
 # Taken from the Oxc compatibility list: https://oxc.rs/compatibility.html
@@ -52,5 +55,17 @@ def normalize(repo: Path, path: Path, content: str) -> str:
 			check=True,
 		)
 		return result.stdout
-	except OSError, subprocess.CalledProcessError:
+	except OSError:
+		# The formatter is not available.
+		return content
+	except subprocess.CalledProcessError as e:
+		if stderr := (e.stderr or "").strip():
+			# The formatter raised an error.
+			err_console.print(
+				f"[red]oxfmt could not format[/red] [bold]{path}[/bold]"
+				f"[red]; using unformatted content.[/red]"
+			)
+			err_console.print(f"[dim]{stderr}[/dim]")
+
+		# The formatter is not available.
 		return content
