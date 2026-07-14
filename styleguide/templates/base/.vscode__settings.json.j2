@@ -7,13 +7,10 @@
 		"titleBar.inactiveBackground": "<< accent_color >>"
 	},
 	{% endif %}
-	"files.associations": {
-		{% filter indent_block(width="\t\t") %}
-		{% block files_associations %}
-		{% endblock files_associations %}
-		{% endfilter %}
-		"**/.sg/*.j2": "jinja"
-	},
+	{% filter indent_block %}
+	{% block project %}
+	{% endblock project %}
+	{% endfilter %}
 	{% if "astro" in exts %}
 	"[astro]": {
 		"editor.formatOnSave": true,
@@ -96,10 +93,13 @@
 	"[yaml]": {
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "oxc.oxc-vscode"
-	}
+	},
 	{% endif %}
-	{% filter indent_block %}
-	{% block project %}
-	{% endblock project %}
-	{% endfilter %}
+	"files.associations": {
+		{% filter indent_block(width="\t\t") %}
+		{% block files_associations %}
+		{% endblock files_associations %}
+		{% endfilter %}
+		"**/.sg/*.j2": "jinja"
+	}
 }
