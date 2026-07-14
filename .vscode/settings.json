@@ -5,10 +5,6 @@
 		"titleBar.activeBackground": "#4d7c0f",
 		"titleBar.inactiveBackground": "#4d7c0f"
 	},
-	"files.associations": {
-		"**/templates/**/*.j2": "jinja",
-		"**/.sg/*.j2": "jinja"
-	},
 	"[json]": {
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "oxc.oxc-vscode"
@@ -36,5 +32,9 @@
 	"[yaml]": {
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "oxc.oxc-vscode"
+	},
+	"files.associations": {
+		"**/templates/**/*.j2": "jinja",
+		"**/.sg/*.j2": "jinja"
 	}
 }
