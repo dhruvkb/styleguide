@@ -10,6 +10,8 @@ from __future__ import annotations
 import json
 import re
 import subprocess
+import time
+from datetime import timedelta
 from importlib.metadata import version
 from pathlib import Path
 
@@ -64,17 +66,40 @@ def remote_owner_repo(repo_path: Path) -> tuple[str | None, str | None]:
 
 def npm_version(package: str) -> dict[str, int]:
 	"""
-	Get the latest version of a package from npmjs.com.
+	Get the latest version of a package.
+
+	The package versions are cached as per `platformdirs`, which respects the env var
+	`$XDG_CACHE_HOME` on macOS.
 	"""
 
-	res = requests.get(f"https://registry.npmjs.org/{package}/latest")
-	res.raise_for_status()
-	data = res.json()
-	version = data.get("version")
-	if not version or not re.match(r"^\d+\.\d+\.\d+$", version):
-		raise RuntimeError(f"unexpected {package} version format: {version!r}")
-	major, minor, patch = map(int, version.split("."))
-	return {"major": major, "minor": minor, "patch": patch}
+	cache_dir = Path(platformdirs.user_cache_dir("styleguide")) / "npm"
+	# `/` in scoped names like "@j178/prek" is not filename-safe.
+	cached = cache_dir / f"{package.replace('/', '__')}.json"
+	if (
+		cached.is_file()
+		and (cached_data := json.loads(cached.read_text()))
+		and (time.time() - cached_data["timestamp"]) < timedelta(days=1).total_seconds()
+	):
+		return cached_data["data"]
+
+	response = requests.get(f"https://registry.npmjs.org/{package}/latest", timeout=30)
+	response.raise_for_status()
+	data = response.json()
+	ver = data.get("version")
+	if not ver or not re.match(r"^\d+\.\d+\.\d+$", ver):
+		raise RuntimeError(f"unexpected {package} version format: {ver!r}")
+	parts = dict(
+		zip(
+			["major", "minor", "patch"],
+			map(int, ver.split(".")),
+			strict=True,
+		)
+	)
+
+	cache_dir.mkdir(parents=True, exist_ok=True)
+	cached.write_text(json.dumps({"timestamp": time.time(), "data": parts}))
+
+	return parts
 
 
 def python_version() -> dict[str, int]:
@@ -126,9 +151,9 @@ def resolve_license(code: str) -> str:
 	response = requests.get(f"https://api.github.com/licenses/{code}", timeout=30)
 	response.raise_for_status()
 	data = response.json()
-	if "body" not in data:
+	body = data.get("body")
+	if not body:
 		raise RuntimeError(f"license API response for {code!r} had no body")
-	body = data["body"]
 
 	cache_dir.mkdir(parents=True, exist_ok=True)
 	cached.write_text(body)
