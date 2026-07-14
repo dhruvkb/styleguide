@@ -5,6 +5,10 @@
 	"$schema": "https://json.schemastore.org/package.json",
 	"private": true,
 	"devDependencies": {
+		{% filter indent_block(width='\t\t') %}
+		{% block dependencies %}
+		{% endblock dependencies %}
+		{% endfilter %}
 		"@j178/prek": "^<< prek.major >>.<< prek.minor >>.<< prek.patch >>",
 		"oxfmt": "^<< oxfmt.major >>.<< oxfmt.minor >>.<< oxfmt.patch >>"
 	},

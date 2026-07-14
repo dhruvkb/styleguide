@@ -1,0 +1,8 @@
+{% extends "no_js/package.json.j2" %}
+
+{% set oxlint = npm_version("oxlint") %}
+{% block dependencies %}
+{% block more_dependencies %}
+{% endblock more_dependencies %}
+"oxlint": "^<< oxlint.major >>.<< oxlint.minor >>.<< oxlint.patch >>",
+{% endblock dependencies %}
