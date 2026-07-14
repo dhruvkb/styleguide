@@ -64,5 +64,6 @@ bump part="minor":
 	git add -p pyproject.toml uv.lock
 	git commit -m "Bump version to $(uv version --short)"
 	git tag -s v$(uv version --short) -m "Release v$(uv version --short)"
+	just self-install
 
 alias B := bump
