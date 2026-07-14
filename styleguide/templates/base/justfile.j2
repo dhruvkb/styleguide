@@ -50,6 +50,8 @@ lint hook="" *files="":
 	pnpm prek run {{ hook }} {{ if files == "" { "--all-files" } else { "--files" } }} {{ files }}
 
 alias l := lint
+{% if self.project() | trim %}
 
 {% block project %}
 {% endblock project %}
+{% endif %}
