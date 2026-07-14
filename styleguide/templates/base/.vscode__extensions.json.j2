@@ -4,7 +4,7 @@
 		{% block recommendations %}
 		{% endblock recommendations %}
 		{% endfilter %}
-		{% if "javascript" in languages %}
+		{% if "vue" in frameworks or "astro" in frameworks %}
 		"dbaeumer.vscode-eslint",
 		{% endif %}
 		{% if "astro" in frameworks %}
